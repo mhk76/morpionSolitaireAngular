@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html data-ng-app="MorpionSolitaire">
+<head>
+	<meta charset="utf-8"/>
+	<meta content='width=device-width' name='viewport' />
+	<title>Morpion solitaire</title>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.5.8/angular.min.js"></script>
+	<script type="text/javascript">
+		var $ = angular.element;  
+	</script>
+	<script type="text/javascript" src="serviceManagerAngularTools.js"></script>
+	<script type="text/javascript" src="client.js"></script>
+	<link rel="stylesheet" type="text/css" href="client.css" />
+	<link rel="stylesheet" type="text/css" href="serviceManagerDialog.css" />
+</head>
+<body data-ng-controller="GameController">
+
+	<h1>Morpion solitaire</h1>
+
+	<div class="languages">
+		<span data-ng-repeat="(id, name) in data.languageList"
+		      data-ng-bind="::id"
+			  data-ng-class="{ selected: id === data.lang }"
+			  title="{{ ::name }}"
+			  data-ng-click="setLanguage(id)">
+		</span>
+	</div>
+
+	<div class="main">
+		<canvas id="board" width="601" height="601" oncontextmenu="return false;" data-unselectable></canvas>
+	</div>
+
+	<div class="tools">
+		<span data-dic-text="lines"></span>: {{ board.lineCount }}
+		<button data-dic-text="finish"
+				data-ng-click="finish()"
+				data-ng-hide="data.state === 3"
+				data-ng-disabled="board.lineCount === 0">
+		</button>
+		<button data-dic-text="new-game"
+				data-ng-click="newGame()"
+				data-ng-show="data.state === 3">
+		</button>
+	</div>
+
+	<div class="highscore">
+		<h2 data-dic-text="highscore"></h2>
+		<table>
+			<tr data-ng-repeat="highscore in data.highscores">
+				<th class="name">
+					{{ ::highscore.name }}
+					({{ highscore.date | formatDate }})
+				</th>
+				<td class="lines" data-ng-bind="highscore.lineCount"></td>
+			</tr>
+		</table>
+	</div>
+
+</body>
+</html>
