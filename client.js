@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('MorpionSolitaire', ['ServiceManagerAngularTools'])
+angular.module('MorpionSolitaire', ['ServerManagerAngularTools'])
 .controller('GameController', function($scope, $q, $timeout, $window, dictionary, dialog, server)
 {
 	const __boardSize = 30;
